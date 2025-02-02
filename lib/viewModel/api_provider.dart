@@ -14,7 +14,7 @@ class AuthState {
 
 class AuthViewModel extends StateNotifier<AuthState> {
   final AuthService _authService;
-  final GetStorage _storage = GetStorage();
+ 
 
   AuthViewModel(this._authService) : super(AuthState());
 

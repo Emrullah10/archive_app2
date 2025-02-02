@@ -123,14 +123,17 @@ class _HomePageState extends ConsumerState<HomePage> {
             icon: const Icon(Icons.settings),
             onPressed: () {
               
-                Navigator.pushNamed(context, '/server');
+                // Navigator.pushNamed(context, '/server');
               
-              // Navigator.pushNamed(context, '/settings');
+              Navigator.pushNamed(context, '/settings');
             },
           ),
         ],
       ),
       drawer: Drawer(
+  child: Column(
+    children: [
+      Expanded(
         child: ListView(
           children: [
             UserAccountsDrawerHeader(
@@ -144,21 +147,34 @@ class _HomePageState extends ConsumerState<HomePage> {
               accountEmail: Text(user?.email ?? ""),
             ),
             ListTile(
-              title: const Text('Log Out'),
-              leading: const Icon(Icons.logout),
-              onTap: () async {
-                await TokenManager.clearToken();
-                Navigator.pushAndRemoveUntil(
-                  context,
-                  MaterialPageRoute(builder: (context) => LoginPage()),
-                  (Route<dynamic> route) => false,
-                );
-                authNotifier.logout();
+              title: const Text('İmar Arşivi Dosyaları'),
+              leading: const Icon(Icons.archive),
+              onTap: () {
+                // Burada arşivlerin listelenmesi için gerekli işlemleri yapabilirsiniz.
+                fetchArchives(); // Arşivleri yeniden yükle
+                Navigator.pop(context); // Drawer'ı kapat
               },
             ),
+            // Diğer ListTile'lar buraya eklenebilir...
           ],
         ),
       ),
+      ListTile(
+        title: const Text('Log Out'),
+        leading: const Icon(Icons.logout),
+        onTap: () async {
+          await TokenManager.clearToken();
+          Navigator.pushAndRemoveUntil(
+            context,
+            MaterialPageRoute(builder: (context) => LoginPage()),
+            (Route<dynamic> route) => false,
+          );
+          authNotifier.logout();
+        },
+      ),
+    ],
+  ),
+),
       body: Padding(
         padding: AppPaddings.all16,
         child: Column(
