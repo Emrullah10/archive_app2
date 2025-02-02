@@ -1,3 +1,5 @@
+// ignore_for_file: deprecated_member_use
+
 import 'package:flutter/material.dart';
 
 class AppColors {
@@ -22,6 +24,7 @@ class AppColors {
 
   // Opaklık Seviyeleri
   static Color primaryColorWithOpacity(double opacity) {
+
     return primaryColor.withOpacity(opacity);
   }
 

@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:archive_app2/data/services/archive_service.dart';
+import 'package:archive_app2/models/archive_model.dart';
 
 class DetayliAramaPage extends StatefulWidget {
   const DetayliAramaPage({Key? key}) : super(key: key);
@@ -9,7 +11,6 @@ class DetayliAramaPage extends StatefulWidget {
 }
 
 class _DetayliAramaPageState extends State<DetayliAramaPage> {
-  // Tüm alanlar için TextEditingController tanımlayalım
   final TextEditingController _klasorNoController = TextEditingController();
   final TextEditingController _konuController = TextEditingController();
   final TextEditingController _tarihController = TextEditingController();
@@ -32,6 +33,8 @@ class _DetayliAramaPageState extends State<DetayliAramaPage> {
   final TextEditingController _arsivIdController = TextEditingController();
   final TextEditingController _yeniController = TextEditingController();
   final TextEditingController _yeniDosyaYiliController = TextEditingController();
+
+  final ArchiveService _archiveService = ArchiveService();
 
   @override
   Widget build(BuildContext context) {
@@ -102,11 +105,11 @@ class _DetayliAramaPageState extends State<DetayliAramaPage> {
             ),
             // Dosya İşlem No
             ListTile(
-              title: const Text("Dosya İşlem No"),
+              title: const Text("Ruhtas No"),
               subtitle: TextField(
                 controller: _dosyaIslemNoController,
                 decoration: const InputDecoration(
-                  hintText: "Dosya İşlem No giriniz",
+                  hintText: "Ruhsat No giriniz",
                 ),
               ),
             ),
@@ -162,11 +165,11 @@ class _DetayliAramaPageState extends State<DetayliAramaPage> {
             ),
             // Adres
             ListTile(
-              title: const Text("Adres"),
+              title: const Text("İskan Ruhsat"),
               subtitle: TextField(
                 controller: _adresController,
                 decoration: const InputDecoration(
-                  hintText: "Adres giriniz",
+                  hintText: "İskan Ruhsat giriniz",
                 ),
               ),
             ),
@@ -182,24 +185,24 @@ class _DetayliAramaPageState extends State<DetayliAramaPage> {
             ),
             // Özel Şartlar
             ListTile(
-              title: const Text("Özel Şartlar"),
+              title: const Text("Ruhsat Sahibi(İsim-Soyisim)"),
               subtitle: TextField(
                 controller: _ozelSartlarController,
                 decoration: const InputDecoration(
-                  hintText: "Özel Şartlar giriniz",
+                  hintText: "Ruhsat Sahibi(İsim-Soyisim) giriniz",
                 ),
               ),
             ),
             // Tasdik Tarihi 1
             ListTile(
-              title: const Text("Tasdik Tarihi 1"),
+              title: const Text("Yeni Yapı Ruhsat Tarihi"),
               subtitle: InkWell(
                 onTap: () => _pickDate(context, _tasdikTarihi1Controller),
                 child: IgnorePointer(
                   child: TextField(
                     controller: _tasdikTarihi1Controller,
                     decoration: const InputDecoration(
-                      hintText: "Tasdik Tarihi 1 seçiniz",
+                      hintText: "Yeni Yapı Ruhsat Tarihi",
                       suffixIcon: Icon(Icons.calendar_today),
                     ),
                   ),
@@ -208,14 +211,14 @@ class _DetayliAramaPageState extends State<DetayliAramaPage> {
             ),
             // Tasdik Tarihi 2
             ListTile(
-              title: const Text("Tasdik Tarihi 2"),
+              title: const Text("Tadilat Ruhsat Sahibi"),
               subtitle: InkWell(
                 onTap: () => _pickDate(context, _tasdikTarihi2Controller),
                 child: IgnorePointer(
                   child: TextField(
                     controller: _tasdikTarihi2Controller,
                     decoration: const InputDecoration(
-                      hintText: "Tasdik Tarihi 2 seçiniz",
+                      hintText: "Tadilat Ruhsat Sahibi",
                       suffixIcon: Icon(Icons.calendar_today),
                     ),
                   ),
@@ -224,30 +227,21 @@ class _DetayliAramaPageState extends State<DetayliAramaPage> {
             ),
             // Tasdik Tarihi 3
             ListTile(
-              title: const Text("Tasdik Tarihi 3"),
+              title: const Text("İsim Değişikliği Ruhsat Tarihi"),
               subtitle: InkWell(
                 onTap: () => _pickDate(context, _tasdikTarihi3Controller),
                 child: IgnorePointer(
                   child: TextField(
                     controller: _tasdikTarihi3Controller,
                     decoration: const InputDecoration(
-                      hintText: "Tasdik Tarihi 3 seçiniz",
+                      hintText: "İsim Değişikliği Ruhsat Tarihi",
                       suffixIcon: Icon(Icons.calendar_today),
                     ),
                   ),
                 ),
               ),
             ),
-            // Açıklama
-            ListTile(
-              title: const Text("Açıklama"),
-              subtitle: TextField(
-                controller: _aciklamaController,
-                decoration: const InputDecoration(
-                  hintText: "Açıklama giriniz",
-                ),
-              ),
-            ),
+            
             // Parsel Kodu
             ListTile(
               title: const Text("Parsel Kodu"),
@@ -268,16 +262,8 @@ class _DetayliAramaPageState extends State<DetayliAramaPage> {
                 ),
               ),
             ),
-            // Yeni
-            ListTile(
-              title: const Text("Yeni"),
-              subtitle: TextField(
-                controller: _yeniController,
-                decoration: const InputDecoration(
-                  hintText: "Yeni giriniz",
-                ),
-              ),
-            ),
+    
+           
             // Yeni Dosya Yılı
             ListTile(
               title: const Text("Yeni Dosya Yılı"),
@@ -316,9 +302,8 @@ class _DetayliAramaPageState extends State<DetayliAramaPage> {
     );
   }
 
-  /// Tarih seçici (DatePicker)
-  Future<void> _pickDate(
-      BuildContext context, TextEditingController controller) async {
+
+  Future<void> _pickDate(BuildContext context, TextEditingController controller) async {
     final DateTime? pickedDate = await showDatePicker(
       context: context,
       initialDate: DateTime.now(),
@@ -326,7 +311,6 @@ class _DetayliAramaPageState extends State<DetayliAramaPage> {
       lastDate: DateTime(2100),
     );
     if (pickedDate != null) {
-      // Tarihi yyyy-MM-dd formatında yazalım (örn. 2025-01-01)
       final formattedDate = DateFormat("dd-MM-yyyy").format(pickedDate);
       setState(() {
         controller.text = formattedDate;
@@ -334,19 +318,66 @@ class _DetayliAramaPageState extends State<DetayliAramaPage> {
     }
   }
 
-  /// Arama işlemini yöneten fonksiyon
-  void _handleSearch() {
-    // Örnek: Controller'daki verileri alıp backend'e gönderin veya filtre uygulayın
+  void _handleSearch() async {
     final klasorNo = _klasorNoController.text;
     final konu = _konuController.text;
     final tarih = _tarihController.text;
-    // ... vb. diğer alanlar
+    final parsel = _parselController.text;
+    final dosyaIslemNoo= _dosyaIslemNoController.text;
+    final sdpp=_sdpController.text;
+    final konumm=_konumController.text;
+    final sicilKoduu=_sicilKoduController.text;
+    final arsivdekiYerii=_arsivdekiYeriController.text;
+    final paftaa=_paftaController.text;
+    final adaa=_adaController.text;
+    final adres=_adresController.text;
+    final imarPlaniAdii=_imarPlaniAdiController.text;
+    final ozelSartlar=_ozelSartlarController.text;
+    final tasdikTarihi1=_tasdikTarihi1Controller.text;
+    final tasdikTarihi2=_tasdikTarihi2Controller.text;
+    final tasdikTarihi3=_tasdikTarihi3Controller.text;
+    final parselKodu=_parselKoduController.text;
+    final arsivId=_arsivIdController.text;
+    final yeniDosyaYili=_yeniDosyaYiliController.text;
 
-    debugPrint("Arama yapıldı. KlasörNo: $klasorNo, Konu: $konu, Tarih: $tarih");
-    // İstediğiniz backend servisine bu verileri gönderip sonuçları getirebilirsiniz.
+    try {
+      final archiveList = await _archiveService.fetchArchive(1, 10, 
+        parsel: parsel,
+        klasorNo: klasorNo,
+        konu: konu,
+        tarih: tarih,
+        dosyaIslemNo: dosyaIslemNoo,
+        sdp: sdpp,
+        konum: konumm,
+        sicilKodu: sicilKoduu,
+        arsivdekiYeri: arsivdekiYerii,
+        pafta: paftaa,
+        ada: adaa,
+        adres: adres,
+        imarPlaniAdi: imarPlaniAdii,
+        ozelSartlar: ozelSartlar,
+        tasdikTarihi1: tasdikTarihi1,
+        tasdikTarihi2: tasdikTarihi2,
+        tasdikTarihi3: tasdikTarihi3,
+        parselKodu: parselKodu,
+        arsivId: arsivId,
+      
+        yeniDosyaYili: yeniDosyaYili,
+      );
+      if (archiveList.isNotEmpty) {
+        Navigator.pushNamed(
+          context,
+          '/detail', 
+          arguments: archiveList.first,  // İlk sonucu detay sayfasına gönderiyoruz
+        );
+      } else {
+        _showErrorDialog('Arama sonuçları bulunamadı');
+      }
+    } catch (e) {
+      _showErrorDialog('Arama sırasında bir hata oluştu: $e');
+    }
   }
 
-  /// Bütün alanları temizler
   void _clearAllFields() {
     setState(() {
       _klasorNoController.clear();
@@ -372,5 +403,23 @@ class _DetayliAramaPageState extends State<DetayliAramaPage> {
       _yeniController.clear();
       _yeniDosyaYiliController.clear();
     });
+  }
+
+  void _showErrorDialog(String message) {
+    showDialog(
+      context: context,
+      builder: (context) => AlertDialog(
+        title: const Text('Hata'),
+        content: Text(message),
+        actions: [
+          TextButton(
+            onPressed: () {
+              Navigator.pop(context);
+            },
+            child: const Text('Kapat'),
+          ),
+        ],
+      ),
+    );
   }
 }

@@ -8,7 +8,7 @@ class ArchiveService {
   final box = GetStorage();
 
   Future<List<ArchiveModel>> fetchArchive(int pageNumber, int pageSize,
-      {String? parsel}) async {
+      {String? parsel,String? klasorNo,String? konu,dynamic tarih,String? sdp,String? konum,String? dosyaIslemNo,String? sicilKodu,String? arsivdekiYeri,String? pafta,String? ada,String? adres,String? imarPlaniAdi,String? ozelSartlar,dynamic tasdikTarihi1,dynamic tasdikTarihi2,dynamic tasdikTarihi3,String? parselKodu,String? arsivId,String? yeniDosyaYili}) async {
     String? serverUrl = box.read('serverUrl') ?? '';
     final String baseUrl = '$serverUrl/backend/api/archivedocuments';
 

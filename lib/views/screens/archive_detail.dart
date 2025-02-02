@@ -71,20 +71,33 @@ class _DetailPageState extends State<DetailPage> {
                     const Padding(
                       padding: EdgeInsets.all(8.0),
                       child: Text(
-                        'Klasör Adı:',
+                        'Klasör No:',
                         style: TextStyle(fontWeight: FontWeight.bold),
                       ),
                     ),
                     Padding(
                       padding: const EdgeInsets.all(8.0),
-                      child: Text(archive.ada ?? 'Bilinmiyor'),
+                      child: Text(archive.klasorNo ?? 'Bilinmiyor'),
                     ),
                   ]),
                   TableRow(children: [
                     const Padding(
                       padding: EdgeInsets.all(8.0),
                       child: Text(
-                        'Yıl:',
+                        'Konu:',
+                        style: TextStyle(fontWeight: FontWeight.bold),
+                      ),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Text(archive.konu ?? 'Bilinmiyor'),
+                    ),
+                  ]),
+                  TableRow(children: [
+                    const Padding(
+                      padding: EdgeInsets.all(8.0),
+                      child: Text(
+                        'Tarih:',
                         style: TextStyle(fontWeight: FontWeight.bold),
                       ),
                     ),
@@ -97,7 +110,20 @@ class _DetailPageState extends State<DetailPage> {
                     const Padding(
                       padding: EdgeInsets.all(8.0),
                       child: Text(
-                        'Renk:',
+                        'SDP:',
+                        style: TextStyle(fontWeight: FontWeight.bold),
+                      ),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Text(archive.sdp ?? 'Bilinmiyor'),
+                    ),
+                  ]),
+                  TableRow(children: [
+                    const Padding(
+                      padding: EdgeInsets.all(8.0),
+                      child: Text(
+                        'Konum:',
                         style: TextStyle(fontWeight: FontWeight.bold),
                       ),
                     ),
@@ -110,13 +136,234 @@ class _DetailPageState extends State<DetailPage> {
                     const Padding(
                       padding: EdgeInsets.all(8.0),
                       child: Text(
-                        'Pantone Değeri:',
+                        'Ruhsat No:',
                         style: TextStyle(fontWeight: FontWeight.bold),
                       ),
                     ),
                     Padding(
                       padding: const EdgeInsets.all(8.0),
-                      child: Text(archive.konum ?? 'Bilinmiyor'),
+                      child: Text(archive.dosyaIslemNo ?? 'Bilinmiyor'),
+                    ),
+                  ]),
+                  TableRow(children: [
+                    const Padding(
+                      padding: EdgeInsets.all(8.0),
+                      child: Text(
+                        'Sicil Kodu:',
+                        style: TextStyle(fontWeight: FontWeight.bold),
+                      ),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Text(archive.sicilKodu ?? 'Bilinmiyor'),
+                    ),
+                  ]),
+                  TableRow(children: [
+                    const Padding(
+                      padding: EdgeInsets.all(8.0),
+                      child: Text(
+                        'Arşivdeki Yeri:',
+                        style: TextStyle(fontWeight: FontWeight.bold),
+                      ),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Text(archive.arsivdekiYeri ?? 'Bilinmiyor'),
+                    ),
+                  ]),
+                  TableRow(children: [
+                    const Padding(
+                      padding: EdgeInsets.all(8.0),
+                      child: Text(
+                        'Mahalle:',
+                        style: TextStyle(fontWeight: FontWeight.bold),
+                      ),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Text(archive.mahalle ?? 'Bilinmiyor'),
+                    ),
+                  ]),
+                  TableRow(children: [
+                    const Padding(
+                      padding: EdgeInsets.all(8.0),
+                      child: Text(
+                        'Pafta:',
+                        style: TextStyle(fontWeight: FontWeight.bold),
+                      ),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Text(archive.pafta ?? 'Bilinmiyor'),
+                    ),
+                  ]),
+                  TableRow(children: [
+                    const Padding(
+                      padding: EdgeInsets.all(8.0),
+                      child: Text(
+                        'Ada:',
+                        style: TextStyle(fontWeight: FontWeight.bold),
+                      ),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Text(archive.ada ?? 'Bilinmiyor'),
+                    ),
+                  ]),
+                  TableRow(children: [
+                    const Padding(
+                      padding: EdgeInsets.all(8.0),
+                      child: Text(
+                        'Parsel:',
+                        style: TextStyle(fontWeight: FontWeight.bold),
+                      ),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Text(archive.parsel ?? 'Bilinmiyor'),
+                    ),
+                  ]),
+                  TableRow(children: [
+                    const Padding(
+                      padding: EdgeInsets.all(8.0),
+                      child: Text(
+                        'İskan Ruhsat:',
+                        style: TextStyle(fontWeight: FontWeight.bold),
+                      ),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Text(archive.adres ?? 'Bilinmiyor'),
+                    ),
+                  ]),
+                  TableRow(children: [
+                    const Padding(
+                      padding: EdgeInsets.all(8.0),
+                      child: Text(
+                        'İmar Plan Adı:',
+                        style: TextStyle(fontWeight: FontWeight.bold),
+                      ),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Text(archive.imarPlaniAdi ?? 'Bilinmiyor'),
+                    ),
+                  ]),
+                  TableRow(children: [
+                    const Padding(
+                      padding: EdgeInsets.all(8.0),
+                      child: Text(
+                        'İsim-Soyisim:',
+                        style: TextStyle(fontWeight: FontWeight.bold),
+                      ),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Text(archive.ozelSartlar ?? 'Bilinmiyor'),
+                    ),
+                  ]),
+                  TableRow(children: [
+                    const Padding(
+                      padding: EdgeInsets.all(8.0),
+                      child: Text(
+                        'Yeni Yapı Ruhsat Tarihi:',
+                        style: TextStyle(fontWeight: FontWeight.bold),
+                      ),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Text(archive.tasdikTarihi1 ?? 'Bilinmiyor'),
+                    ),
+                  ]),
+                  TableRow(children: [
+                    const Padding(
+                      padding: EdgeInsets.all(8.0),
+                      child: Text(
+                        'Yeni Yapı Ruhsat Tarihi:',
+                        style: TextStyle(fontWeight: FontWeight.bold),
+                      ),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Text(archive.tasdikTarihi1 ?? 'Bilinmiyor'),
+                    ),
+                  ]),
+                  TableRow(children: [
+                    const Padding(
+                      padding: EdgeInsets.all(8.0),
+                      child: Text(
+                        'Tadilat Ruhsat Tarihi:',
+                        style: TextStyle(fontWeight: FontWeight.bold),
+                      ),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Text(archive.tasdikTarihi2?? 'Bilinmiyor'),
+                    ),
+                  ]),
+                  TableRow(children: [
+                    const Padding(
+                      padding: EdgeInsets.all(8.0),
+                      child: Text(
+                        'İsim Değişikliği Ruhsat Tarihi:',
+                        style: TextStyle(fontWeight: FontWeight.bold),
+                      ),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Text(archive.tasdikTarihi3 ?? 'Bilinmiyor'),
+                    ),
+                  ]),
+                  TableRow(children: [
+                    const Padding(
+                      padding: EdgeInsets.all(8.0),
+                      child: Text(
+                        'Yeni Yapı Ruhsat Tarihi:',
+                        style: TextStyle(fontWeight: FontWeight.bold),
+                      ),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Text(archive.tasdikTarihi1 ?? 'Bilinmiyor'),
+                    ),
+                  ]),
+                  TableRow(children: [
+                    const Padding(
+                      padding: EdgeInsets.all(8.0),
+                      child: Text(
+                        'Parsel Kodu:',
+                        style: TextStyle(fontWeight: FontWeight.bold),
+                      ),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Text(archive.parselKodu ?? 'Bilinmiyor'),
+                    ),
+                  ]),
+                  TableRow(children: [
+                    const Padding(
+                      padding: EdgeInsets.all(8.0),
+                      child: Text(
+                        'ArşivId:',
+                        style: TextStyle(fontWeight: FontWeight.bold),
+                      ),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Text(archive.arsivId ?? 'Bilinmiyor'),
+                    ),
+                  ]),
+                  TableRow(children: [
+                    const Padding(
+                      padding: EdgeInsets.all(8.0),
+                      child: Text(
+                        'Yeni Dosya Yılı:',
+                        style: TextStyle(fontWeight: FontWeight.bold),
+                      ),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Text(archive.yeniDosyaYili ?? 'Bilinmiyor'),
                     ),
                   ]),
                 ],
