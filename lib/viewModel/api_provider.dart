@@ -2,7 +2,7 @@ import 'package:archive_app2/models/auth_model.dart';
 import 'package:archive_app2/data/services/auth_service.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:get_storage/get_storage.dart';
+
 
 class AuthState {
   final AuthModel? authModel;

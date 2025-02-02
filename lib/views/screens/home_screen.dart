@@ -8,8 +8,7 @@ import 'package:archive_app2/views/screens/login_screen.dart';
 import 'package:archive_app2/views/widgets/custom_list_tile_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-
-
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class HomePage extends ConsumerStatefulWidget {
   const HomePage({super.key});
@@ -23,7 +22,7 @@ class _HomePageState extends ConsumerState<HomePage> {
   final TextEditingController searchController = TextEditingController();
 
   List<ArchiveModel> allArchiveList = [];
-   User?user;
+  User? user;
 
   bool isLoading = false;
   bool isLoadingMore = false;
@@ -55,8 +54,7 @@ class _HomePageState extends ConsumerState<HomePage> {
     final argum = ModalRoute.of(context)!.settings.arguments;
     if (argum != null && argum is User) {
       user = argum;
-    } 
-    
+    }
   }
 
   void changeLoading() {
@@ -115,6 +113,7 @@ class _HomePageState extends ConsumerState<HomePage> {
 
     return Scaffold(
       appBar: AppBar(
+        automaticallyImplyLeading : true,
         forceMaterialTransparency: true,
         title: const Text(titleText),
         actions: [
@@ -122,59 +121,54 @@ class _HomePageState extends ConsumerState<HomePage> {
           IconButton(
             icon: const Icon(Icons.settings),
             onPressed: () {
-              
-                // Navigator.pushNamed(context, '/server');
-              
               Navigator.pushNamed(context, '/settings');
             },
           ),
         ],
       ),
       drawer: Drawer(
-  child: Column(
-    children: [
-      Expanded(
-        child: ListView(
+        child: Column(
           children: [
-            UserAccountsDrawerHeader(
-              decoration: const BoxDecoration(
-                color: Colors.blue,
+            Expanded(
+              child: ListView(
+                children: [
+                  UserAccountsDrawerHeader(
+                    decoration: const BoxDecoration(
+                      color: Colors.blue,
+                    ),
+                    currentAccountPicture: const CircleAvatar(
+                      backgroundImage: AssetImage('assets/serdivan.png'),
+                    ),
+                    accountName: Text(user?.nameSurname ?? ""),
+                    accountEmail: Text(user?.email ?? ""),
+                  ),
+                  ListTile(
+                    title: const Text('İmar Arşivi Dosyaları'),
+                    leading: const Icon(Icons.archive),
+                    onTap: () {
+                      fetchArchives(); // Arşivleri yeniden yükle
+                      Navigator.pop(context); // Drawer'ı kapat
+                    },
+                  ),
+                ],
               ),
-              currentAccountPicture: const CircleAvatar(
-                backgroundImage: AssetImage('assets/serdivan.png'),
-              ),
-              accountName: Text(user?.nameSurname ?? ""),
-              accountEmail: Text(user?.email ?? ""),
             ),
             ListTile(
-              title: const Text('İmar Arşivi Dosyaları'),
-              leading: const Icon(Icons.archive),
-              onTap: () {
-                // Burada arşivlerin listelenmesi için gerekli işlemleri yapabilirsiniz.
-                fetchArchives(); // Arşivleri yeniden yükle
-                Navigator.pop(context); // Drawer'ı kapat
+              title: const Text('Log Out'),
+              leading: const Icon(Icons.logout),
+              onTap: () async {
+                await TokenManager.clearToken();
+                Navigator.pushAndRemoveUntil(
+                  context,
+                  MaterialPageRoute(builder: (context) => const LoginPage()),
+                  (Route<dynamic> route) => false,
+                );
+                authNotifier.logout();
               },
             ),
-            // Diğer ListTile'lar buraya eklenebilir...
           ],
         ),
       ),
-      ListTile(
-        title: const Text('Log Out'),
-        leading: const Icon(Icons.logout),
-        onTap: () async {
-          await TokenManager.clearToken();
-          Navigator.pushAndRemoveUntil(
-            context,
-            MaterialPageRoute(builder: (context) => LoginPage()),
-            (Route<dynamic> route) => false,
-          );
-          authNotifier.logout();
-        },
-      ),
-    ],
-  ),
-),
       body: Padding(
         padding: AppPaddings.all16,
         child: Column(
@@ -192,6 +186,7 @@ class _HomePageState extends ConsumerState<HomePage> {
                       ),
                       filled: true,
                       fillColor: Colors.grey[200],
+                      contentPadding: EdgeInsets.symmetric(vertical: 12.h, horizontal: 16.w), // Esnek padding
                     ),
                     onChanged: (value) {
                       searchQuery = value;
@@ -208,6 +203,7 @@ class _HomePageState extends ConsumerState<HomePage> {
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(30.0),
                     ),
+                    padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 12.h), // Esnek buton padding
                   ),
                   child: const Text('Detaylı Arama'),
                 ),
@@ -229,7 +225,7 @@ class _HomePageState extends ConsumerState<HomePage> {
                         final archiveItem = allArchiveList[index];
 
                         return Padding(
-                          padding: const EdgeInsets.all(8.0),
+                          padding: EdgeInsets.symmetric(vertical: 8.h),
                           child: CustomListTile(
                             folderNo: archiveItem.klasorNo ?? "",
                             folderDate: archiveItem.tarih ?? "",

@@ -5,6 +5,7 @@ import 'package:archive_app2/models/bolum_model.dart';
 import 'package:archive_app2/models/archive_model.dart';
 import 'package:open_file/open_file.dart'; // Dosyayı açmak için
 import 'package:path_provider/path_provider.dart'; // Dosya yolu almak için
+import 'package:flutter_screenutil/flutter_screenutil.dart'; // flutter_screenutil paketini ekleyin
 
 class BelgelerScreen extends StatefulWidget {
   const BelgelerScreen({super.key});
@@ -79,13 +80,25 @@ class _BelgelerScreenState extends State<BelgelerScreen> {
               itemBuilder: (context, index) {
                 var belge = belgeler[index];
                 return ListTile(
-                  title: Text(belge.fileName ?? 'Belge Adı Yok'),
+                  title: Text(
+                    belge.fileName ?? 'Belge Adı Yok',
+                    style: TextStyle(fontSize: 16.sp), // Ölçeklendirilmiş font boyutu
+                  ),
                   subtitle: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text('Bölüm: ${belge.bolumName ?? 'Bilinmiyor'}'),
-                      Text('Boyut: ${belge.size ?? 'Bilinmiyor'} KB'),
-                      Text('Yükleme Tarihi: ${belge.uploadDate?.toLocal().toString() ?? 'Bilinmiyor'}'),
+                      Text(
+                        'Bölüm: ${belge.bolumName ?? 'Bilinmiyor'}',
+                        style: TextStyle(fontSize: 14.sp), // Ölçeklendirilmiş font boyutu
+                      ),
+                      Text(
+                        'Boyut: ${belge.size ?? 'Bilinmiyor'} KB',
+                        style: TextStyle(fontSize: 14.sp), // Ölçeklendirilmiş font boyutu
+                      ),
+                      Text(
+                        'Yükleme Tarihi: ${belge.uploadDate?.toLocal().toString() ?? 'Bilinmiyor'}',
+                        style: TextStyle(fontSize: 14.sp), // Ölçeklendirilmiş font boyutu
+                      ),
                     ],
                   ),
                   onTap: () => _downloadAndOpenFile(belge),

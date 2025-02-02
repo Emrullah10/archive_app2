@@ -4,6 +4,7 @@ import 'package:archive_app2/views/screens/login_screen.dart';
 import 'package:archive_app2/views/widgets/custom_text_form_field.dart';
 import 'package:flutter/material.dart';
 import 'package:get_storage/get_storage.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';  // flutter_screenutil ekledim
 
 class SettingPage extends StatelessWidget {
   final box = GetStorage(); // GetStorage instance
@@ -42,19 +43,19 @@ class SettingPage extends StatelessWidget {
                 child: Center(
                   child: Image.asset(
                     'assets/serdivan.png',
-                    width: 150,
-                    height: 150,
+                    width: 150.w, // Esnek boyut
+                    height: 150.h, // Esnek boyut
                   ),
                 ),
               ),
               Padding(
-                padding: const EdgeInsets.only(top: 50),
+                padding: EdgeInsets.only(top: 50.h), // Esnek üst padding
                 child: Row(
                   children: [
                     Expanded(
                       flex: 3,
                       child: Padding(
-                        padding: const EdgeInsets.all(8.0),
+                        padding: EdgeInsets.all(8.w), // Esnek padding
                         child: CustomTextFormField(
                           labelText: "Sunucu URL Giriniz",
                           backgroundColor: AppColors.backgroundColor,
@@ -74,7 +75,7 @@ class SettingPage extends StatelessWidget {
 
                       Navigator.pushReplacement(
                         context,
-                        MaterialPageRoute(builder: (context) => LoginPage()),
+                        MaterialPageRoute(builder: (context) => const LoginPage()),
                       );
                     }
                   },
@@ -84,9 +85,9 @@ class SettingPage extends StatelessWidget {
                       borderRadius: BorderRadius.circular(10),
                     ),
                   ),
-                  child: const SizedBox(
-                    height: 50,
-                    width: 100,
+                  child: SizedBox(
+                    height: 50.h, // Esnek buton yüksekliği
+                    width: 100.w, // Esnek buton genişliği
                     child: Padding(
                       padding: AppPaddings.all16,
                       child: Text(
@@ -94,6 +95,7 @@ class SettingPage extends StatelessWidget {
                         textAlign: TextAlign.center,
                         style: TextStyle(
                           color: Colors.white,
+                          fontSize: 16.sp, // Esnek font boyutu
                         ),
                       ),
                     ),

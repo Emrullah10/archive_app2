@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';  // flutter_screenutil ekledim
 
 class CustomListTile extends StatelessWidget {
   final String folderNo;
@@ -10,6 +11,7 @@ class CustomListTile extends StatelessWidget {
   final VoidCallback onTap;
 
   const CustomListTile({
+    super.key,
     required this.parsel,
     required this.folderNo,
     required this.folderDate,
@@ -24,12 +26,13 @@ class CustomListTile extends StatelessWidget {
     return GestureDetector(
       onTap: onTap,
       child: Container(
-        height: 170,
+        height: 170.h, // Esnek yükseklik
         decoration: BoxDecoration(
           color: Colors.white,
-          borderRadius: BorderRadius.circular(10),
+          borderRadius: BorderRadius.circular(10.r), // Esnek border radius
           boxShadow: [
             BoxShadow(
+              // ignore: deprecated_member_use
               color: Colors.grey.withOpacity(0.5),
               spreadRadius: 2,
               blurRadius: 5,
@@ -39,55 +42,55 @@ class CustomListTile extends StatelessWidget {
         ),
         child: Row(
           children: [
-            Icon(icon, size: 40, color: Colors.blueAccent),
-            const SizedBox(width: 16.0),
+            Icon(icon, size: 40.w, color: Colors.blueAccent), // Esnek ikon boyutu
+            SizedBox(width: 16.w), // Esnek genişlik
             Expanded(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
                     "Klasör No: ${folderNo}",
-                    style: const TextStyle(
-                      fontSize: 18,
+                    style: TextStyle(
+                      fontSize: 18.sp, // Esnek font boyutu
                       fontWeight: FontWeight.bold,
                     ),
                   ),
-                  const SizedBox(height: 8.0),
+                  SizedBox(height: 8.h), // Esnek yükseklik
                   Text(
                     "Konu: ${foldermean}",
-                    style: const TextStyle(
-                      fontSize: 18,
+                    style: TextStyle(
+                      fontSize: 18.sp, // Esnek font boyutu
                       fontWeight: FontWeight.bold,
                     ),
                   ),
-                  const SizedBox(height: 8.0),
+                  SizedBox(height: 8.h), // Esnek yükseklik
                   Text(
                     "Tarih: ${folderDate}",
-                    style: const TextStyle(
-                      fontSize: 18,
+                    style: TextStyle(
+                      fontSize: 18.sp, // Esnek font boyutu
                       fontWeight: FontWeight.bold,
                     ),
                   ),
-                  const SizedBox(height: 8.0),
+                  SizedBox(height: 8.h), // Esnek yükseklik
                   Text(
                     "Dosya İslem NO: ${islem}",
-                    style: const TextStyle(
-                      fontSize: 18,
+                    style: TextStyle(
+                      fontSize: 18.sp, // Esnek font boyutu
                       fontWeight: FontWeight.bold,
                     ),
                   ),
-                  const SizedBox(height: 8.0),
+                  SizedBox(height: 8.h), // Esnek yükseklik
                   Text(
                     "Parsel: ${parsel}",
-                    style: const TextStyle(
-                      fontSize: 18,
+                    style: TextStyle(
+                      fontSize: 18.sp, // Esnek font boyutu
                       fontWeight: FontWeight.bold,
                     ),
                   ),
                 ],
               ),
             ),
-            Icon(Icons.arrow_forward_ios, color: Colors.grey),
+            Icon(Icons.arrow_forward_ios, color: Colors.grey, size: 20.w), // Esnek ikon boyutu
           ],
         ),
       ),

@@ -5,9 +5,10 @@ import 'package:archive_app2/views/widgets/custom_text_form_field.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:get_storage/get_storage.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class LoginPage extends ConsumerStatefulWidget {
-  LoginPage({super.key});
+  const LoginPage({super.key});
 
   @override
   ConsumerState<LoginPage> createState() => _LoginPageState();
@@ -60,14 +61,13 @@ class _LoginPageState extends ConsumerState<LoginPage> {
                 child: Center(
                   child: Image.asset(
                     'assets/serdivan.png',
-                    width: 150,
-                    height: 150,
+                    width: 150.w,  // Esnek boyut
+                    height: 150.h, // Esnek boyut
                   ),
                 ),
               ),
               Padding(
-                padding:
-                    EdgeInsets.only(top: 130, left: 16, right: 16, bottom: 16),
+                padding: EdgeInsets.only(top: 130.h, left: 16.w, right: 16.w, bottom: 16.h),
                 child: CustomTextFormField(
                   labelText: 'Kullanıcı Adı',
                   controller: _emailController,
@@ -114,20 +114,21 @@ class _LoginPageState extends ConsumerState<LoginPage> {
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(10),
                     ),
+                    padding: EdgeInsets.symmetric(vertical: 14.h, horizontal: 50.w), // Esnek buton padding
                   ),
                   child: SizedBox(
-                    height: 25,
-                    width: 100,
+                    height: 25.h, // Esnek boyut
+                    width: 100.w, // Esnek boyut
                     child: Center(
                       child: isLoading
                           ? const CircularProgressIndicator(
                               color: Colors.white,
                             )
-                          : const Text(
+                          :  Text(
                               'Giriş',
                               textAlign: TextAlign.center,
                               style:
-                                  TextStyle(color: Colors.white, fontSize: 15),
+                                  TextStyle(color: Colors.white, fontSize: 15.sp), // Esnek font boyutu
                             ),
                     ),
                   ),

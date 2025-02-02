@@ -45,6 +45,7 @@ dependencies:
   syncfusion_flutter_pdfviewer: ^27.1.58
   shared_preferences: ^2.4.0
   open_file: ^3.5.10
+  flutter_screenutil: ^5.9.3
 
 
 dev_dependencies:

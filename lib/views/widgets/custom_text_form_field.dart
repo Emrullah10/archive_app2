@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';  // flutter_screenutil ekledim
 
 class CustomTextFormField extends StatelessWidget {
   final String labelText;
@@ -7,15 +8,16 @@ class CustomTextFormField extends StatelessWidget {
   final TextInputType keyboardType;
   final Color backgroundColor;
   final TextEditingController controller;
+
   const CustomTextFormField({
-    Key? key,
+    super.key,
     required this.controller,
     required this.labelText,
     this.validator,
     this.isObscure = false,
     this.keyboardType = TextInputType.text,
     this.backgroundColor = Colors.white,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -25,7 +27,7 @@ class CustomTextFormField extends StatelessWidget {
         filled: true,
         fillColor: backgroundColor,
         border: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(10),
+          borderRadius: BorderRadius.circular(10.r), // Esnek border radius
         ),
       ),
       obscureText: isObscure,

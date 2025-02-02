@@ -1,9 +1,8 @@
-
 import 'package:archive_app2/data/services/bolum.service.dart';
 import 'package:archive_app2/models/archive_model.dart';
 import 'package:archive_app2/models/bolum_model.dart';
 import 'package:flutter/material.dart';
-
+import 'package:flutter_screenutil/flutter_screenutil.dart';  // flutter_screenutil ekledim
 
 class DetailPage extends StatefulWidget {
   const DetailPage({super.key});
@@ -23,7 +22,6 @@ class _DetailPageState extends State<DetailPage> {
   void didChangeDependencies() {
     super.didChangeDependencies();
 
-    // context ile bağımlı işlemleri burada yapın
     final args = ModalRoute.of(context)?.settings.arguments;
     if (args != null && args is ArchiveModel) {
       archive = args;
@@ -40,7 +38,11 @@ class _DetailPageState extends State<DetailPage> {
         appBar: AppBar(
           title: const Text(titleText),
           actions: [
-            Image.asset('assets/serdivanminilogo.png', width: 50, height: 50),
+            Image.asset(
+              'assets/serdivanminilogo.png',
+              width: 50.w, // Esnek logo genişliği
+              height: 50.h, // Esnek logo yüksekliği
+            ),
             IconButton(
               icon: const Icon(Icons.settings),
               onPressed: () {
@@ -59,7 +61,7 @@ class _DetailPageState extends State<DetailPage> {
           // İlk sekme: Klasör Bilgileri
           SingleChildScrollView(
             child: Padding(
-              padding: const EdgeInsets.all(16.0),
+              padding: EdgeInsets.all(16.w),  // Esnek padding
               child: Table(
                 border: TableBorder.all(color: Colors.grey),
                 columnWidths: const {
@@ -68,301 +70,327 @@ class _DetailPageState extends State<DetailPage> {
                 },
                 children: [
                   TableRow(children: [
-                    const Padding(
-                      padding: EdgeInsets.all(8.0),
-                      child: Text(
+                    Padding(
+                      padding: EdgeInsets.all(8.h),  // Esnek padding
+                      child: const Text(
                         'Klasör No:',
                         style: TextStyle(fontWeight: FontWeight.bold),
                       ),
                     ),
                     Padding(
-                      padding: const EdgeInsets.all(8.0),
+                      padding: EdgeInsets.all(8.h),  // Esnek padding
                       child: Text(archive.klasorNo ?? 'Bilinmiyor'),
                     ),
                   ]),
                   TableRow(children: [
-                    const Padding(
-                      padding: EdgeInsets.all(8.0),
-                      child: Text(
+                    Padding(
+                      padding: EdgeInsets.all(8.h),  // Esnek padding
+                      child: const Text(
                         'Konu:',
                         style: TextStyle(fontWeight: FontWeight.bold),
                       ),
                     ),
                     Padding(
-                      padding: const EdgeInsets.all(8.0),
+                      padding: EdgeInsets.all(8.h),  // Esnek padding
                       child: Text(archive.konu ?? 'Bilinmiyor'),
                     ),
                   ]),
                   TableRow(children: [
-                    const Padding(
-                      padding: EdgeInsets.all(8.0),
-                      child: Text(
+                    Padding(
+                      padding: EdgeInsets.all(8.h),  // Esnek padding
+                      child: const Text(
                         'Tarih:',
                         style: TextStyle(fontWeight: FontWeight.bold),
                       ),
                     ),
                     Padding(
-                      padding: const EdgeInsets.all(8.0),
+                      padding: EdgeInsets.all(8.h),  // Esnek padding
                       child: Text(archive.tarih ?? 'Bilinmiyor'),
                     ),
                   ]),
                   TableRow(children: [
-                    const Padding(
-                      padding: EdgeInsets.all(8.0),
-                      child: Text(
+                    Padding(
+                      padding: EdgeInsets.all(8.h),  // Esnek padding
+                      child: const Text(
                         'SDP:',
                         style: TextStyle(fontWeight: FontWeight.bold),
                       ),
                     ),
                     Padding(
-                      padding: const EdgeInsets.all(8.0),
+                      padding: EdgeInsets.all(8.h),  // Esnek padding
                       child: Text(archive.sdp ?? 'Bilinmiyor'),
                     ),
                   ]),
                   TableRow(children: [
-                    const Padding(
-                      padding: EdgeInsets.all(8.0),
-                      child: Text(
+                    Padding(
+                      padding: EdgeInsets.all(8.h),  // Esnek padding
+                      child: const Text(
                         'Konum:',
                         style: TextStyle(fontWeight: FontWeight.bold),
                       ),
                     ),
                     Padding(
-                      padding: const EdgeInsets.all(8.0),
+                      padding: EdgeInsets.all(8.h),  // Esnek padding
                       child: Text(archive.konum ?? 'Bilinmiyor'),
                     ),
                   ]),
                   TableRow(children: [
-                    const Padding(
-                      padding: EdgeInsets.all(8.0),
-                      child: Text(
+                    Padding(
+                      padding: EdgeInsets.all(8.h),  // Esnek padding
+                      child: const Text(
                         'Ruhsat No:',
                         style: TextStyle(fontWeight: FontWeight.bold),
                       ),
                     ),
                     Padding(
-                      padding: const EdgeInsets.all(8.0),
+                      padding: EdgeInsets.all(8.h),  // Esnek padding
                       child: Text(archive.dosyaIslemNo ?? 'Bilinmiyor'),
                     ),
                   ]),
                   TableRow(children: [
-                    const Padding(
-                      padding: EdgeInsets.all(8.0),
-                      child: Text(
+                    Padding(
+                      padding: EdgeInsets.all(8.h),  // Esnek padding
+                      child: const Text(
                         'Sicil Kodu:',
                         style: TextStyle(fontWeight: FontWeight.bold),
                       ),
                     ),
                     Padding(
-                      padding: const EdgeInsets.all(8.0),
+                      padding: EdgeInsets.all(8.h),  // Esnek padding
                       child: Text(archive.sicilKodu ?? 'Bilinmiyor'),
                     ),
                   ]),
                   TableRow(children: [
-                    const Padding(
-                      padding: EdgeInsets.all(8.0),
-                      child: Text(
+                    Padding(
+                      padding: EdgeInsets.all(8.h),  // Esnek padding
+                      child: const Text(
                         'Arşivdeki Yeri:',
                         style: TextStyle(fontWeight: FontWeight.bold),
                       ),
                     ),
                     Padding(
-                      padding: const EdgeInsets.all(8.0),
+                      padding: EdgeInsets.all(8.h),  // Esnek padding
                       child: Text(archive.arsivdekiYeri ?? 'Bilinmiyor'),
                     ),
                   ]),
                   TableRow(children: [
-                    const Padding(
-                      padding: EdgeInsets.all(8.0),
-                      child: Text(
+                    Padding(
+                      padding: EdgeInsets.all(8.h),  // Esnek padding
+                      child: const Text(
                         'Mahalle:',
                         style: TextStyle(fontWeight: FontWeight.bold),
                       ),
                     ),
                     Padding(
-                      padding: const EdgeInsets.all(8.0),
+                      padding: EdgeInsets.all(8.h),  // Esnek padding
                       child: Text(archive.mahalle ?? 'Bilinmiyor'),
                     ),
                   ]),
                   TableRow(children: [
-                    const Padding(
-                      padding: EdgeInsets.all(8.0),
-                      child: Text(
+                    Padding(
+                      padding: EdgeInsets.all(8.h),  // Esnek padding
+                      child: const Text(
                         'Pafta:',
                         style: TextStyle(fontWeight: FontWeight.bold),
                       ),
                     ),
                     Padding(
-                      padding: const EdgeInsets.all(8.0),
+                      padding: EdgeInsets.all(8.h),  // Esnek padding
                       child: Text(archive.pafta ?? 'Bilinmiyor'),
                     ),
                   ]),
                   TableRow(children: [
-                    const Padding(
-                      padding: EdgeInsets.all(8.0),
-                      child: Text(
+                    Padding(
+                      padding: EdgeInsets.all(8.h),  // Esnek padding
+                      child: const Text(
                         'Ada:',
                         style: TextStyle(fontWeight: FontWeight.bold),
                       ),
                     ),
                     Padding(
-                      padding: const EdgeInsets.all(8.0),
+                      padding: EdgeInsets.all(8.h),  // Esnek padding
                       child: Text(archive.ada ?? 'Bilinmiyor'),
                     ),
                   ]),
                   TableRow(children: [
-                    const Padding(
-                      padding: EdgeInsets.all(8.0),
-                      child: Text(
+                    Padding(
+                      padding: EdgeInsets.all(8.h),  // Esnek padding
+                      child: const Text(
                         'Parsel:',
                         style: TextStyle(fontWeight: FontWeight.bold),
                       ),
                     ),
                     Padding(
-                      padding: const EdgeInsets.all(8.0),
+                      padding: EdgeInsets.all(8.h),  // Esnek padding
                       child: Text(archive.parsel ?? 'Bilinmiyor'),
                     ),
                   ]),
                   TableRow(children: [
-                    const Padding(
-                      padding: EdgeInsets.all(8.0),
-                      child: Text(
+                    Padding(
+                      padding: EdgeInsets.all(8.h),  // Esnek padding
+                      child: const Text(
                         'İskan Ruhsat:',
                         style: TextStyle(fontWeight: FontWeight.bold),
                       ),
                     ),
                     Padding(
-                      padding: const EdgeInsets.all(8.0),
+                      padding: EdgeInsets.all(8.h),  // Esnek padding
                       child: Text(archive.adres ?? 'Bilinmiyor'),
                     ),
                   ]),
                   TableRow(children: [
-                    const Padding(
-                      padding: EdgeInsets.all(8.0),
-                      child: Text(
+                    Padding(
+                      padding: EdgeInsets.all(8.h),  // Esnek padding
+                      child: const Text(
                         'İmar Plan Adı:',
                         style: TextStyle(fontWeight: FontWeight.bold),
                       ),
                     ),
                     Padding(
-                      padding: const EdgeInsets.all(8.0),
+                      padding: EdgeInsets.all(8.h),  // Esnek padding
                       child: Text(archive.imarPlaniAdi ?? 'Bilinmiyor'),
                     ),
                   ]),
                   TableRow(children: [
-                    const Padding(
-                      padding: EdgeInsets.all(8.0),
-                      child: Text(
+                    Padding(
+                      padding: EdgeInsets.all(8.h),  // Esnek padding
+                      child: const Text(
                         'İsim-Soyisim:',
                         style: TextStyle(fontWeight: FontWeight.bold),
                       ),
                     ),
                     Padding(
-                      padding: const EdgeInsets.all(8.0),
+                      padding: EdgeInsets.all(8.h),  // Esnek padding
                       child: Text(archive.ozelSartlar ?? 'Bilinmiyor'),
                     ),
                   ]),
                   TableRow(children: [
-                    const Padding(
-                      padding: EdgeInsets.all(8.0),
-                      child: Text(
+                    Padding(
+                      padding: EdgeInsets.all(8.h),  // Esnek padding
+                      child: const Text(
                         'Yeni Yapı Ruhsat Tarihi:',
                         style: TextStyle(fontWeight: FontWeight.bold),
                       ),
                     ),
                     Padding(
-                      padding: const EdgeInsets.all(8.0),
+                      padding: EdgeInsets.all(8.h),  // Esnek padding
                       child: Text(archive.tasdikTarihi1 ?? 'Bilinmiyor'),
                     ),
                   ]),
                   TableRow(children: [
-                    const Padding(
-                      padding: EdgeInsets.all(8.0),
-                      child: Text(
+                    Padding(
+                      padding: EdgeInsets.all(8.h),  // Esnek padding
+                      child: const Text(
                         'Yeni Yapı Ruhsat Tarihi:',
                         style: TextStyle(fontWeight: FontWeight.bold),
                       ),
                     ),
                     Padding(
-                      padding: const EdgeInsets.all(8.0),
+                      padding: EdgeInsets.all(8.h),  // Esnek padding
                       child: Text(archive.tasdikTarihi1 ?? 'Bilinmiyor'),
                     ),
                   ]),
                   TableRow(children: [
-                    const Padding(
-                      padding: EdgeInsets.all(8.0),
-                      child: Text(
+                    Padding(
+                      padding: EdgeInsets.all(8.h),  // Esnek padding
+                      child: const Text(
                         'Tadilat Ruhsat Tarihi:',
                         style: TextStyle(fontWeight: FontWeight.bold),
                       ),
                     ),
                     Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Text(archive.tasdikTarihi2?? 'Bilinmiyor'),
+                      padding: EdgeInsets.all(8.h),  // Esnek padding
+                      child: Text(archive.tasdikTarihi2 ?? 'Bilinmiyor'),
                     ),
                   ]),
                   TableRow(children: [
-                    const Padding(
-                      padding: EdgeInsets.all(8.0),
-                      child: Text(
+                    Padding(
+                      padding: EdgeInsets.all(8.h),  // Esnek padding
+                      child: const Text(
                         'İsim Değişikliği Ruhsat Tarihi:',
                         style: TextStyle(fontWeight: FontWeight.bold),
                       ),
                     ),
                     Padding(
-                      padding: const EdgeInsets.all(8.0),
+                      padding: EdgeInsets.all(8.h),  // Esnek padding
                       child: Text(archive.tasdikTarihi3 ?? 'Bilinmiyor'),
                     ),
                   ]),
                   TableRow(children: [
-                    const Padding(
-                      padding: EdgeInsets.all(8.0),
-                      child: Text(
+                    Padding(
+                      padding: EdgeInsets.all(8.h),  // Esnek padding
+                      child: const Text(
                         'Yeni Yapı Ruhsat Tarihi:',
                         style: TextStyle(fontWeight: FontWeight.bold),
                       ),
                     ),
                     Padding(
-                      padding: const EdgeInsets.all(8.0),
+                      padding: EdgeInsets.all(8.h),  // Esnek padding
                       child: Text(archive.tasdikTarihi1 ?? 'Bilinmiyor'),
                     ),
                   ]),
                   TableRow(children: [
-                    const Padding(
-                      padding: EdgeInsets.all(8.0),
-                      child: Text(
+                    Padding(
+                      padding: EdgeInsets.all(8.h),  // Esnek padding
+                      child: const Text(
                         'Parsel Kodu:',
                         style: TextStyle(fontWeight: FontWeight.bold),
                       ),
                     ),
                     Padding(
-                      padding: const EdgeInsets.all(8.0),
+                      padding: EdgeInsets.all(8.h),  // Esnek padding
                       child: Text(archive.parselKodu ?? 'Bilinmiyor'),
                     ),
                   ]),
                   TableRow(children: [
-                    const Padding(
-                      padding: EdgeInsets.all(8.0),
-                      child: Text(
+                    Padding(
+                      padding: EdgeInsets.all(8.h),  // Esnek padding
+                      child: const Text(
                         'ArşivId:',
                         style: TextStyle(fontWeight: FontWeight.bold),
                       ),
                     ),
                     Padding(
-                      padding: const EdgeInsets.all(8.0),
+                      padding: EdgeInsets.all(8.h),  // Esnek padding
                       child: Text(archive.arsivId ?? 'Bilinmiyor'),
                     ),
                   ]),
                   TableRow(children: [
-                    const Padding(
-                      padding: EdgeInsets.all(8.0),
-                      child: Text(
+                    Padding(
+                      padding: EdgeInsets.all(8.h),  // Esnek padding
+                      child: const Text(
+                        'Açıklama:',
+                        style: TextStyle(fontWeight: FontWeight.bold),
+                      ),
+                    ),
+                    Padding(
+                      padding: EdgeInsets.all(8.h),  // Esnek padding
+                      child: Text(archive.aciklama ?? 'Bilinmiyor'),
+                    ),
+                  ]),
+                  TableRow(children: [
+                    Padding(
+                      padding: EdgeInsets.all(8.h),  // Esnek padding
+                      child: const Text(
+                        'Yeni  :',
+                        style: TextStyle(fontWeight: FontWeight.bold),
+                      ),
+                    ),
+                    Padding(
+                      padding: EdgeInsets.all(8.h),  // Esnek padding
+                      child: Text(archive.yeni ?? 'Bilinmiyor'),
+                    ),
+                  ]),
+                  TableRow(children: [
+                    Padding(
+                      padding: EdgeInsets.all(8.h),  // Esnek padding
+                      child: const Text(
                         'Yeni Dosya Yılı:',
                         style: TextStyle(fontWeight: FontWeight.bold),
                       ),
                     ),
                     Padding(
-                      padding: const EdgeInsets.all(8.0),
+                      padding: EdgeInsets.all(8.h),  // Esnek padding
                       child: Text(archive.yeniDosyaYili ?? 'Bilinmiyor'),
                     ),
                   ]),
@@ -387,130 +415,43 @@ class _DetailPageState extends State<DetailPage> {
                   itemCount: bolumler.length,
                   itemBuilder: (context, index) {
                     var bolum = bolumler[index];
-                    return bolum.subBolums.isNotEmpty ? _expansionBolums(bolum):_listTileSubBolum(context,bolum,archive);
+                    return bolum.subBolums.isNotEmpty
+                        ? _expansionBolums(bolum)
+                        : _listTileSubBolum(context, bolum, archive);
                   },
                 );
               }
             },
           ),
-          // ListView(
-          //   children: <Widget>[
-          //     ExpansionTile(
-          //       initiallyExpanded: isTile1Expanded,
-          //       onExpansionChanged: (bool expanded) {
-          //         setState(() {
-          //           isTile1Expanded = expanded;
-          //         });
-          //       },
-          //       title: const Text('Dosya 1'),
-          //       children: <Widget>[
-          //         ExpansionTile(
-          //           initiallyExpanded: isTile2Expanded,
-          //           onExpansionChanged: (bool expanded) {
-          //             setState(() {
-          //               isTile2Expanded = expanded;
-          //             });
-          //           },
-          //           tilePadding: const EdgeInsets.only(left: 40.0),
-          //           title: const Text('Bölüm 1'),
-          //           children: <Widget>[
-          //             ListTile(
-          //               contentPadding: const EdgeInsets.only(left: 80.0),
-          //               title: const Text('Bölüm 1 PDF 1'),
-          //               onTap: () async {
-          //                 // PDF'yi açma işlemi
-          //                 String path = await _copyAssetToLocalStorage(
-          //                     'assets/harita.pdf');
-          //                 if (path.isNotEmpty) {
-          //                   Navigator.push(
-          //                     context,
-          //                     MaterialPageRoute(
-          //                       builder: (context) =>
-          //                           PDFViewerPage(filePath: path),
-          //                     ),
-          //                   );
-          //                 } else {
-          //                   // Hata yönetimi, örneğin bir uyarı gösterin
-          //                 }
-          //               },
-          //             ),
-          //             ListTile(
-          //               contentPadding: const EdgeInsets.only(left: 80.0),
-          //               title: const Text('Bölüm 1 PDF 2'),
-          //               onTap: () async {
-          //                 String path = await _copyAssetToLocalStorage(
-          //                     'assets/dosya.pdf');
-          //                 if (path.isNotEmpty) {
-          //                   Navigator.push(
-          //                     context,
-          //                     MaterialPageRoute(
-          //                       builder: (context) =>
-          //                           PDFViewerPage(filePath: path),
-          //                     ),
-          //                   );
-          //                 } else {
-          //                   // Hata yönetimi, örneğin bir uyarı gösterin
-          //                 }
-          //               },
-          //             ),
-          //           ],
-          //         ),
-          //         ExpansionTile(
-          //           tilePadding: const EdgeInsets.only(left: 40.0),
-          //           title: const Text('Bölüm 2'),
-          //           children: <Widget>[
-          //             ListTile(
-          //               contentPadding: const EdgeInsets.only(left: 80.0),
-          //               title: const Text('Bölüm 2 PDF 1'),
-          //               onTap: () async {
-          //                 String path = await _copyAssetToLocalStorage(
-          //                     'assets/serdivanparkuru.pdf');
-          //                 if (path.isNotEmpty) {
-          //                   Navigator.push(
-          //                     context,
-          //                     MaterialPageRoute(
-          //                       builder: (context) =>
-          //                           PDFViewerPage(filePath: path),
-          //                     ),
-          //                   );
-          //                 } else {
-          //                   // Hata yönetimi, örneğin bir uyarı gösterin
-          //                 }
-          //               },
-          //             ),
-          //           ],
-          //         ),
-          //       ],
-          //     ),
-          //   ],
-          // ),
         ]),
       ),
     );
   }
 
-  
-ExpansionTile _expansionBolums(Bolum bolum) {
+  ExpansionTile _expansionBolums(Bolum bolum) {
     return ExpansionTile(
-                    title: Text(bolum.name),
-                    children: bolum.subBolums.map((subBolum) {
-                      return ListTile(
-                        title: Text(subBolum.name),
-                        onTap: () {
-                         Navigator.pushNamed(context, '/belge', arguments:{"subBolum":subBolum,"archive":archive},);
-                        },
-                      );
-                    }).toList(),
-                  );
+      title: Text(bolum.name),
+      children: bolum.subBolums.map((subBolum) {
+        return ListTile(
+          title: Text(subBolum.name),
+          onTap: () {
+            Navigator.pushNamed(
+              context,
+              '/belge',
+              arguments: {"subBolum": subBolum, "archive": archive},
+            );
+          },
+        );
+      }).toList(),
+    );
+  }
+
+  ListTile _listTileSubBolum(BuildContext context, Bolum bolum, ArchiveModel archive) {
+    return ListTile(
+      title: Text(bolum.name),
+      onTap: () {
+        Navigator.pushNamed(context, '/belge', arguments: {"bolum": bolum, "archive": archive});
+      },
+    );
   }
 }
-
-ListTile _listTileSubBolum(context,Bolum bolum,ArchiveModel archive) {
-  return ListTile(
-    title: Text(bolum.name),
-    onTap: () {
-      Navigator.pushNamed(context, '/belge', arguments:{"bolum":bolum,"archive":archive}  );
-    },
-  );
-}
-

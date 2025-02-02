@@ -3,6 +3,7 @@ import 'package:archive_app2/views/screens/server_control_screen.dart';
 import 'package:archive_app2/views/screens/login_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:get_storage/get_storage.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';  // flutter_screenutil ekledim
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
@@ -40,7 +41,7 @@ class _SplashScreenState extends State<SplashScreen> with TickerProviderStateMix
       box.write('isFirstLaunch', false);
       Navigator.pushReplacement(
         context,
-        MaterialPageRoute(builder: (context) => IntroductionScreen()),
+        MaterialPageRoute(builder: (context) => const IntroductionScreen()),
       );
     } else if (box.read('serverUrl') == null) {
       // Sunucu URL'si yoksa sunucu kontrol ekranına git
@@ -72,9 +73,19 @@ class _SplashScreenState extends State<SplashScreen> with TickerProviderStateMix
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Image.asset('assets/serdivan.png', height: 100), // Logo
+              Image.asset(
+                'assets/serdivan.png',
+                height: 100.h,  // Esnek logo boyutu
+                width: 100.w,  // Esnek logo boyutu
+              ),
               const SizedBox(height: 20),
-              const Text('SERDİVAN BELEDİYESİ', style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold)),
+              Text(
+                'SERDİVAN BELEDİYESİ',
+                style: TextStyle(
+                  fontSize: 24.sp,  // Esnek font boyutu
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
             ],
           ),
         ),

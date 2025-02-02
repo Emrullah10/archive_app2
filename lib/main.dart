@@ -1,6 +1,4 @@
 import 'dart:io';
-
-
 import 'package:archive_app2/views/screens/archive_detail.dart';
 import 'package:archive_app2/views/screens/belgeler_screen.dart';
 import 'package:archive_app2/views/screens/detail_search.dart';
@@ -13,6 +11,7 @@ import 'package:archive_app2/views/screens/splash_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:get_storage/get_storage.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart'; // flutter_screenutil paketini ekleyin
 
 class PostHttpOverrides extends HttpOverrides {
   @override
@@ -37,20 +36,27 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      title: 'Archive App',
-      initialRoute: '/splash', // Her açılışta SplashScreen göster
-      routes: {
-        '/splash': (context) => const SplashScreen(),
-        '/login': (context) => LoginPage(),
-        '/server': (context) => const ServerControlPage(),
-        '/settings': (context) => SettingPage(),
-        '/home': (context) => const HomePage(),
-        '/intro': (context) => IntroductionScreen(),
-        '/detail': (context) => const DetailPage(),
-        '/search': (context) => const DetayliAramaPage(),
-        '/belge': (context) => const BelgelerScreen(),
+    return ScreenUtilInit(
+      designSize: const Size(450, 900), // Tasarımınızın orijinal boyutları (örneğin, Figma'daki boyutlar)
+      minTextAdapt: true,
+      splitScreenMode: true,
+      builder: (context, child) {
+        return MaterialApp(
+          debugShowCheckedModeBanner: false,
+          title: 'Archive App',
+          initialRoute: '/splash', // Her açılışta SplashScreen göster
+          routes: {
+            '/splash': (context) => const SplashScreen(),
+            '/login': (context) => const LoginPage(),
+            '/server': (context) => const ServerControlPage(),
+            '/settings': (context) => SettingPage(),
+            '/home': (context) => const HomePage(),
+            '/intro': (context) => const IntroductionScreen(),
+            '/detail': (context) => const DetailPage(),
+            '/search': (context) => const DetayliAramaPage(),
+            '/belge': (context) => const BelgelerScreen(),
+          },
+        );
       },
     );
   }

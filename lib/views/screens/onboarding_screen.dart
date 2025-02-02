@@ -1,24 +1,26 @@
-
 import 'package:archive_app2/views/screens/server_control_screen.dart';
 import 'package:archive_app2/views/widgets/Introduction_card_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart'; // Page indicator paketi
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class IntroductionScreen extends StatefulWidget {
+  const IntroductionScreen({super.key});
+
   @override
   _IntroductionScreenState createState() => _IntroductionScreenState();
 }
 
 class _IntroductionScreenState extends State<IntroductionScreen> {
-  PageController _pageController = PageController();
+  final PageController _pageController = PageController();
   int _currentPage = 0;
 
   // Kartları oluşturan fonksiyon
   List<Widget> _buildPages() {
     return [
-      IntroductionCard(),
-      IntroductionCard(),
-      IntroductionCard(),
+      const IntroductionCard(),
+      const IntroductionCard(),
+      const IntroductionCard(),
       // İstediğin kadar kart ekleyebilirsin
     ];
   }
@@ -39,16 +41,15 @@ class _IntroductionScreenState extends State<IntroductionScreen> {
             children: _buildPages(),
           ),
           Positioned(
-            bottom: 20,
-            left: 20,
-            right: 20,
+            bottom: 20.h, // Esnek bottom padding
+            left: 20.w,  // Esnek left padding
+            right: 20.w, // Esnek right padding
             child: Container(
-              height: 70,
-              padding: EdgeInsets.symmetric(horizontal: 10, vertical: 20),
+              height: 70.h,  // Esnek height
+              padding: EdgeInsets.symmetric(horizontal: 10.w, vertical: 20.h), // Esnek padding
               decoration: BoxDecoration(
                 color: Colors.orangeAccent,
-                borderRadius:
-                    BorderRadius.circular(20), // Köşeleri ovalleştirme
+                borderRadius: BorderRadius.circular(20), // Köşeleri ovalleştirme
               ),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -58,23 +59,26 @@ class _IntroductionScreenState extends State<IntroductionScreen> {
                       Navigator.pushReplacement(
                         context,
                         MaterialPageRoute(
-                            builder: (context) => ServerControlPage()),
+                            builder: (context) => const ServerControlPage()),
                       );
                     },
-                    child: Text('Tanıtımı Geç',
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontWeight: FontWeight.bold,
-                        )),
+                    child: Text(
+                      'Tanıtımı Geç',
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontWeight: FontWeight.bold,
+                        fontSize: 16.sp,  // Esnek font boyutu
+                      ),
+                    ),
                   ),
                   Padding(
-                    padding: const EdgeInsets.only(right: 20),
+                    padding: EdgeInsets.only(right: 20.w),  // Esnek padding
                     child: SmoothPageIndicator(
                       controller: _pageController,
                       count: _buildPages().length,
                       effect: ExpandingDotsEffect(
-                        dotHeight: 10,
-                        dotWidth: 10,
+                        dotHeight: 10.h,  // Esnek dot height
+                        dotWidth: 10.w,   // Esnek dot width
                         activeDotColor: Colors.green, // Aktif noktaların rengi
                         dotColor: Colors.grey, // Pasif noktaların rengi
                       ),
@@ -85,10 +89,10 @@ class _IntroductionScreenState extends State<IntroductionScreen> {
                     children: [
                       if (_currentPage != 0)
                         IconButton(
-                          icon: Icon(Icons.arrow_back),
+                          icon: const Icon(Icons.arrow_back),
                           onPressed: () {
                             _pageController.previousPage(
-                              duration: Duration(milliseconds: 300),
+                              duration: const Duration(milliseconds: 300),
                               curve: Curves.easeIn,
                             );
                           },
@@ -96,10 +100,10 @@ class _IntroductionScreenState extends State<IntroductionScreen> {
                       // İleri Butonu
                       if (_currentPage != _buildPages().length - 1)
                         IconButton(
-                          icon: Icon(Icons.arrow_forward),
+                          icon: const Icon(Icons.arrow_forward),
                           onPressed: () {
                             _pageController.nextPage(
-                              duration: Duration(milliseconds: 300),
+                              duration: const Duration(milliseconds: 300),
                               curve: Curves.easeIn,
                             );
                           },
@@ -108,17 +112,17 @@ class _IntroductionScreenState extends State<IntroductionScreen> {
                       if (_currentPage == _buildPages().length - 1)
                         IconButton(
                           color: Colors.green,
-                          icon: Icon(Icons.done),
+                          icon: const Icon(Icons.done),
                           onPressed: () {
                             Navigator.pushReplacement(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) => ServerControlPage()),
+                                  builder: (context) => const ServerControlPage()),
                             );
                           },
                         ),
                     ],
-                  )
+                  ),
                 ],
               ),
             ),

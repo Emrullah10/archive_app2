@@ -1,121 +1,98 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';  // flutter_screenutil ekledim
 
-class CustomTableWidget extends StatelessWidget {
-  const CustomTableWidget(
-      {super.key,
-      required this.textName,
-      required this.textName2,
-      required this.textNo,
-      required this.textNo2,
-      required this.textSub,
-      required this.textSub2,
-      required this.textexplain,
-      required this.textexplain2});
-  final String textName;
-  final String textName2;
-  final String textNo;
-  final String textNo2;
-  final String textSub;
-  final String textSub2;
-  final String textexplain;
-  final String textexplain2;
+class CustomListTile extends StatelessWidget {
+  final String folderNo;
+  final String foldermean;
+  final String folderDate;
+  final String islem;
+  final String parsel;
+  final IconData icon;
+  final VoidCallback onTap;
+
+  const CustomListTile({
+    super.key,
+    required this.parsel,
+    required this.folderNo,
+    required this.folderDate,
+    required this.foldermean,
+    required this.islem,
+    required this.icon,
+    required this.onTap,
+  });
 
   @override
   Widget build(BuildContext context) {
-    return Table(
-      border: null,
-      children: [
-        TableRow(
-          children: [
-            TableCell(
-              child: Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Text(
-                  textName,
-                  style: TextStyle(
-                    fontSize: 25,
-                    color: Colors.redAccent,
-                  ),
-                ),
-              ),
-            ),
-            TableCell(
-              child: Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Text(textName2, style: TextStyle(fontSize: 25)),
-              ),
+    return GestureDetector(
+      onTap: onTap,
+      child: Container(
+        height: 170.h, // Esnek yükseklik
+        decoration: BoxDecoration(
+          color: Colors.white,
+          borderRadius: BorderRadius.circular(10.r), // Esnek border radius
+          boxShadow: [
+            BoxShadow(
+              color: Colors.grey.withOpacity(0.5),
+              spreadRadius: 2,
+              blurRadius: 5,
+              offset: const Offset(0, 3), // Shadow position
             ),
           ],
         ),
-        TableRow(
-          decoration: BoxDecoration(color: Colors.grey.shade400),
+        child: Row(
           children: [
-            TableCell(
-              child: Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Text(
-                  textNo,
-                  style: TextStyle(
-                    fontSize: 25,
-                    color: Colors.redAccent,
+            Icon(icon, size: 40.w, color: Colors.blueAccent), // Esnek ikon boyutu
+            SizedBox(width: 16.w), // Esnek genişlik
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    "Klasör No: ${folderNo}",
+                    style: TextStyle(
+                      fontSize: 18.sp, // Esnek font boyutu
+                      fontWeight: FontWeight.bold,
+                    ),
                   ),
-                ),
+                  SizedBox(height: 8.h), // Esnek yükseklik
+                  Text(
+                    "Konu: ${foldermean}",
+                    style: TextStyle(
+                      fontSize: 18.sp, // Esnek font boyutu
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                  SizedBox(height: 8.h), // Esnek yükseklik
+                  Text(
+                    "Tarih: ${folderDate}",
+                    style: TextStyle(
+                      fontSize: 18.sp, // Esnek font boyutu
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                  SizedBox(height: 8.h), // Esnek yükseklik
+                  Text(
+                    "Dosya İslem NO: ${islem}",
+                    style: TextStyle(
+                      fontSize: 18.sp, // Esnek font boyutu
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                  SizedBox(height: 8.h), // Esnek yükseklik
+                  Text(
+                    "Parsel: ${parsel}",
+                    style: TextStyle(
+                      fontSize: 18.sp, // Esnek font boyutu
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                ],
               ),
             ),
-            TableCell(
-              child: Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Text(textNo2, style: TextStyle(fontSize: 25)),
-              ),
-            ),
+            Icon(Icons.arrow_forward_ios, color: Colors.grey, size: 20.w), // Esnek ikon boyutu
           ],
         ),
-        TableRow(
-          children: [
-            TableCell(
-              child: Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Text(
-                  textSub,
-                  style: TextStyle(
-                    fontSize: 25,
-                    color: Colors.redAccent,
-                  ),
-                ),
-              ),
-            ),
-            TableCell(
-              child: Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Text(textSub2, style: TextStyle(fontSize: 25)),
-              ),
-            ),
-          ],
-        ),
-        TableRow(
-          decoration: BoxDecoration(color: Colors.grey.shade400),
-          children: [
-            TableCell(
-              child: Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Text(
-                  textexplain,
-                  style: TextStyle(
-                    fontSize: 25,
-                    color: Colors.redAccent,
-                  ),
-                ),
-              ),
-            ),
-            TableCell(
-              child: Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Text(textexplain2, style: TextStyle(fontSize: 25)),
-              ),
-            ),
-          ],
-        ),
-      ],
+      ),
     );
   }
 }
