@@ -1,5 +1,8 @@
 import 'package:archive_app2/views/screens/onboarding_screen.dart';
+import 'package:archive_app2/views/screens/server_control_screen.dart';
+import 'package:archive_app2/views/screens/login_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:get_storage/get_storage.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
@@ -22,13 +25,36 @@ class _SplashScreenState extends State<SplashScreen> with TickerProviderStateMix
     _animation = CurvedAnimation(parent: _controller, curve: Curves.easeIn);
     _controller.forward();
 
-    // Splash süresi sonunda tanıtım ekranına geçiş
+    // Splash süresi sonunda gerekli ekrana geçiş
     Future.delayed(const Duration(seconds: 3), () {
+      navigateToNextScreen();
+    });
+  }
+
+  void navigateToNextScreen() {
+    final box = GetStorage();
+    bool isFirstLaunch = box.read('isFirstLaunch') ?? true;
+
+    if (isFirstLaunch) {
+      // İlk açılışta tanıtım ekranını göster
+      box.write('isFirstLaunch', false);
       Navigator.pushReplacement(
         context,
         MaterialPageRoute(builder: (context) => IntroductionScreen()),
       );
-    });
+    } else if (box.read('serverUrl') == null) {
+      // Sunucu URL'si yoksa sunucu kontrol ekranına git
+      Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(builder: (context) => const ServerControlPage()),
+      );
+    } else {
+      // Sunucu URL'si varsa, direkt olarak giriş ekranına yönlendir
+      Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(builder: (context) => LoginPage()),
+      );
+    }
   }
 
   @override

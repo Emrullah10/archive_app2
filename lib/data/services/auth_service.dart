@@ -48,23 +48,17 @@ class AuthService {
 
 // Token Yönetimi için TokenManager
 class TokenManager {
-  static const String _tokenKey = 'authToken';
+  static final GetStorage _storage = GetStorage();
 
-  // Token'ı saklama
   static Future<void> saveToken(String token) async {
-    final prefs = await SharedPreferences.getInstance();
-    await prefs.setString(_tokenKey, token);
+    await _storage.write('token', token);
   }
 
-  // Token'ı okuma
   static Future<String?> getToken() async {
-    final prefs = await SharedPreferences.getInstance();
-    return prefs.getString(_tokenKey);
+    return _storage.read('token');
   }
 
-  // Token'ı silme
   static Future<void> clearToken() async {
-    final prefs = await SharedPreferences.getInstance();
-    await prefs.remove(_tokenKey);
+    await _storage.remove('token');
   }
 }

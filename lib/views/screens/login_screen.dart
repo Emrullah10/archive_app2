@@ -1,17 +1,44 @@
+import 'package:archive_app2/data/services/auth_service.dart';
 import 'package:archive_app2/utils/app_pading.dart';
 import 'package:archive_app2/viewModel/api_provider.dart';
 import 'package:archive_app2/views/widgets/custom_text_form_field.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:get_storage/get_storage.dart';
 
-class LoginPage extends ConsumerWidget {
+class LoginPage extends ConsumerStatefulWidget {
   LoginPage({super.key});
 
+  @override
+  ConsumerState<LoginPage> createState() => _LoginPageState();
+}
+
+class _LoginPageState extends ConsumerState<LoginPage> {
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
+  final GetStorage _storage = GetStorage();
+  bool _rememberMe = false;
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  void initState() {
+    super.initState();
+    // "Beni Hatırla" seçeneğini kontrol et
+    _rememberMe = _storage.read('rememberMe') ?? false;
+    if (_rememberMe) {
+      // Token kontrolü yap ve ana sayfaya yönlendir
+      checkTokenAndNavigate();
+    }
+  }
+
+  Future<void> checkTokenAndNavigate() async {
+    final token = await TokenManager.getToken();
+    if (token != null) {
+      Navigator.pushReplacementNamed(context, '/home');
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
     final authNotifier = ref.read(authViewModelProvider.notifier);
     final isLoading = ref.watch(authViewModelProvider).isLoading;
 
@@ -56,6 +83,23 @@ class LoginPage extends ConsumerWidget {
               ),
               Padding(
                 padding: AppPaddings.all16,
+                child: Row(
+                  children: [
+                    Checkbox(
+                      value: _rememberMe,
+                      onChanged: (value) {
+                        setState(() {
+                          _rememberMe = value ?? false;
+                        });
+                        _storage.write('rememberMe', _rememberMe);
+                      },
+                    ),
+                    const Text('Beni Hatırla'),
+                  ],
+                ),
+              ),
+              Padding(
+                padding: AppPaddings.all16,
                 child: ElevatedButton(
                   onPressed: isLoading
                       ? null
@@ -72,7 +116,7 @@ class LoginPage extends ConsumerWidget {
                     ),
                   ),
                   child: SizedBox(
-                    height: 50,
+                    height: 25,
                     width: 100,
                     child: Center(
                       child: isLoading

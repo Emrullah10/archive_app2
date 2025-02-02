@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:archive_app2/data/services/archive_service.dart';
-import 'package:archive_app2/models/archive_model.dart';
+
 
 class DetayliAramaPage extends StatefulWidget {
   const DetayliAramaPage({Key? key}) : super(key: key);
