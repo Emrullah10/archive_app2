@@ -29,7 +29,7 @@ class ServerControlPage extends ConsumerWidget {
               ),
               child: Center(
                 child: Image.asset(
-                  'assets/serdivan.png',
+                  'assets/bilicisoft.jpg',
                   width: 150.w,  // Esnek genişlik
                   height: 150.h, // Esnek yükseklik
                 ),

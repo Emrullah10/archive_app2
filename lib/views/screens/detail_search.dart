@@ -1,3 +1,4 @@
+import 'package:archive_app2/views/widgets/custom_list_tile_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:archive_app2/data/services/archive_service.dart';
@@ -43,7 +44,7 @@ class _DetayliAramaPageState extends State<DetayliAramaPage> {
         title: const Text("Detaylı Arama"),
       ),
       body: SingleChildScrollView(
-        padding:  EdgeInsets.symmetric(vertical: 8.h, horizontal: 16.w),
+        padding: EdgeInsets.symmetric(vertical: 8.h, horizontal: 16.w),
         child: Column(
           children: [
             // Klasör No
@@ -107,7 +108,7 @@ class _DetayliAramaPageState extends State<DetayliAramaPage> {
                 ),
               ),
             ),
-            // Dosya İşlem No
+            // Dosya İşlem No (Ruhsat No)
             ListTile(
               title: const Text("Ruhtas No"),
               subtitle: TextField(
@@ -173,7 +174,7 @@ class _DetayliAramaPageState extends State<DetayliAramaPage> {
                 ),
               ),
             ),
-            // Adres
+            // İskan Ruhsat (Adres)
             ListTile(
               title: const Text("İskan Ruhsat"),
               subtitle: TextField(
@@ -195,7 +196,7 @@ class _DetayliAramaPageState extends State<DetayliAramaPage> {
                 ),
               ),
             ),
-            // Özel Şartlar
+            // Ruhsat Sahibi (Özel Şartlar)
             ListTile(
               title: const Text("Ruhsat Sahibi(İsim-Soyisim)"),
               subtitle: TextField(
@@ -206,7 +207,7 @@ class _DetayliAramaPageState extends State<DetayliAramaPage> {
                 ),
               ),
             ),
-            // Tasdik Tarihi 1
+            // Yeni Yapı Ruhsat Tarihi
             ListTile(
               title: const Text("Yeni Yapı Ruhsat Tarihi"),
               subtitle: InkWell(
@@ -223,7 +224,7 @@ class _DetayliAramaPageState extends State<DetayliAramaPage> {
                 ),
               ),
             ),
-            // Tasdik Tarihi 2
+            // Tadilat Ruhsat Sahibi
             ListTile(
               title: const Text("Tadilat Ruhsat Sahibi"),
               subtitle: InkWell(
@@ -240,7 +241,7 @@ class _DetayliAramaPageState extends State<DetayliAramaPage> {
                 ),
               ),
             ),
-            // Tasdik Tarihi 3
+            // İsim Değişikliği Ruhsat Tarihi
             ListTile(
               title: const Text("İsim Değişikliği Ruhsat Tarihi"),
               subtitle: InkWell(
@@ -290,18 +291,13 @@ class _DetayliAramaPageState extends State<DetayliAramaPage> {
                 ),
               ),
             ),
-
             const SizedBox(height: 16),
-
             // "Ara" ve "Temizle" butonları
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
                 ElevatedButton(
-                  onPressed: () {
-                    // Tüm controller verilerini toplayıp arama işlemini başlatabilirsiniz
-                    _handleSearch();
-                  },
+                  onPressed: _handleSearch,
                   child: const Text("Ara"),
                 ),
                 ElevatedButton(
@@ -334,63 +330,109 @@ class _DetayliAramaPageState extends State<DetayliAramaPage> {
   }
 
   void _handleSearch() async {
-    final klasorNo = _klasorNoController.text;
-    final konu = _konuController.text;
-    final tarih = _tarihController.text;
-    final parsel = _parselController.text;
-    final dosyaIslemNoo = _dosyaIslemNoController.text;
-    final sdpp = _sdpController.text;
-    final konumm = _konumController.text;
-    final sicilKoduu = _sicilKoduController.text;
-    final arsivdekiYerii = _arsivdekiYeriController.text;
-    final paftaa = _paftaController.text;
-    final adaa = _adaController.text;
-    final adres = _adresController.text;
-    final imarPlaniAdii = _imarPlaniAdiController.text;
-    final ozelSartlar = _ozelSartlarController.text;
-    final tasdikTarihi1 = _tasdikTarihi1Controller.text;
-    final tasdikTarihi2 = _tasdikTarihi2Controller.text;
-    final tasdikTarihi3 = _tasdikTarihi3Controller.text;
-    final parselKodu = _parselKoduController.text;
-    final arsivId = _arsivIdController.text;
-    final yeniDosyaYili = _yeniDosyaYiliController.text;
+  final klasorNo = _klasorNoController.text;
+  final konu = _konuController.text;
+  final tarih = _tarihController.text;
+  final parsel = _parselController.text;
+  final dosyaIslemNoo = _dosyaIslemNoController.text;
+  final sdpp = _sdpController.text;
+  final konumm = _konumController.text;
+  final sicilKoduu = _sicilKoduController.text;
+  final arsivdekiYerii = _arsivdekiYeriController.text;
+  final paftaa = _paftaController.text;
+  final adaa = _adaController.text;
+  final adres = _adresController.text;
+  final imarPlaniAdii = _imarPlaniAdiController.text;
+  final ozelSartlar = _ozelSartlarController.text;
+  final tasdikTarihi1 = _tasdikTarihi1Controller.text;
+  final tasdikTarihi2 = _tasdikTarihi2Controller.text;
+  final tasdikTarihi3 = _tasdikTarihi3Controller.text;
+  final parselKodu = _parselKoduController.text;
+  final arsivId = _arsivIdController.text;
+  final yeniDosyaYili = _yeniDosyaYiliController.text;
 
-    try {
-      final archiveList = await _archiveService.fetchArchive(1, 10,
-        parsel: parsel,
-        klasorNo: klasorNo,
-        konu: konu,
-        tarih: tarih,
-        dosyaIslemNo: dosyaIslemNoo,
-        sdp: sdpp,
-        konum: konumm,
-        sicilKodu: sicilKoduu,
-        arsivdekiYeri: arsivdekiYerii,
-        pafta: paftaa,
-        ada: adaa,
-        adres: adres,
-        imarPlaniAdi: imarPlaniAdii,
-        ozelSartlar: ozelSartlar,
-        tasdikTarihi1: tasdikTarihi1,
-        tasdikTarihi2: tasdikTarihi2,
-        tasdikTarihi3: tasdikTarihi3,
-        parselKodu: parselKodu,
-        arsivId: arsivId,
-        yeniDosyaYili: yeniDosyaYili,
+  try {
+    final archiveList = await _archiveService.fetchArchive(
+      1,
+      10,
+      parsel: parsel,
+      klasorNo: klasorNo,
+      konu: konu,
+      tarih: tarih,
+      dosyaIslemNo: dosyaIslemNoo,
+      sdp: sdpp,
+      konum: konumm,
+      sicilKodu: sicilKoduu,
+      arsivdekiYeri: arsivdekiYerii,
+      pafta: paftaa,
+      ada: adaa,
+      adres: adres,
+      imarPlaniAdi: imarPlaniAdii,
+      ozelSartlar: ozelSartlar,
+      tasdikTarihi1: tasdikTarihi1,
+      tasdikTarihi2: tasdikTarihi2,
+      tasdikTarihi3: tasdikTarihi3,
+      parselKodu: parselKodu,
+      arsivId: arsivId,
+      yeniDosyaYili: yeniDosyaYili,
+    );
+
+    if (archiveList.isNotEmpty) {
+      showModalBottomSheet(
+        context: context,
+        isScrollControlled: true,
+        builder: (context) {
+          return SizedBox(
+            height: 0.8.sh,
+            child: Column(
+              children: [
+                Padding(
+                  padding: EdgeInsets.all(16.w),
+                  child: Text(
+                    "Arama Sonuçları (${archiveList.length})",
+                    style: TextStyle(fontSize: 18.sp, fontWeight: FontWeight.bold),
+                  ),
+                ),
+                Expanded(
+                  child: ListView.builder(
+                    itemCount: archiveList.length,
+                    itemBuilder: (context, index) {
+                      final archiveItem = archiveList[index];
+                      return Padding(
+                        padding: EdgeInsets.symmetric(vertical: 8.h),
+                        child: CustomListTile(
+                          folderNo: archiveItem.klasorNo ?? "",
+                          folderDate: archiveItem.tarih ?? "",
+                          islem: archiveItem.dosyaIslemNo ?? "",
+                          foldermean: archiveItem.konum ?? "",
+                          parsel: archiveItem.parsel ?? "",
+                          icon: Icons.folder,
+                          onTap: () {
+                            Navigator.pop(context); // Bottom sheet kapansın
+                            Navigator.pushNamed(
+                              context,
+                              '/detail',
+                              arguments: archiveItem,
+                            );
+                          },
+                        ),
+                      );
+                    },
+                  ),
+                ),
+              ],
+            ),
+          );
+        },
       );
-      if (archiveList.isNotEmpty) {
-        Navigator.pushNamed(
-          context,
-          '/detail', 
-          arguments: archiveList.first,  // İlk sonucu detay sayfasına gönderiyoruz
-        );
-      } else {
-        _showErrorDialog('Arama sonuçları bulunamadı');
-      }
-    } catch (e) {
-      _showErrorDialog('Arama sırasında bir hata oluştu: $e');
+    } else {
+      _showErrorDialog('Arama sonuçları bulunamadı');
     }
+  } catch (e) {
+    _showErrorDialog('Arama sırasında bir hata oluştu: $e');
   }
+}
+
 
   void _clearAllFields() {
     setState(() {

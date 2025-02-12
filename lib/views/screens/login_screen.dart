@@ -19,6 +19,7 @@ class _LoginPageState extends ConsumerState<LoginPage> {
   final TextEditingController _passwordController = TextEditingController();
   final GetStorage _storage = GetStorage();
   bool _rememberMe = false;
+  bool _obscurePassword = true; // Şifrenin gizlenip gösterilmesini kontrol eden değişken
 
   @override
   void initState() {
@@ -77,8 +78,19 @@ class _LoginPageState extends ConsumerState<LoginPage> {
                 padding: AppPaddings.all16,
                 child: CustomTextFormField(
                   labelText: 'Şifre',
-                  isObscure: true,
                   controller: _passwordController,
+                  isObscure: _obscurePassword,
+                  // Şifre gizle/göster ikonu ekliyoruz
+                  suffixIcon: IconButton(
+                    icon: Icon(
+                      _obscurePassword ? Icons.visibility_off : Icons.visibility,
+                    ),
+                    onPressed: () {
+                      setState(() {
+                        _obscurePassword = !_obscurePassword;
+                      });
+                    },
+                  ),
                 ),
               ),
               Padding(
@@ -99,7 +111,7 @@ class _LoginPageState extends ConsumerState<LoginPage> {
                 ),
               ),
               Padding(
-                padding: AppPaddings.all16,
+                padding: AppPaddings.all8,
                 child: ElevatedButton(
                   onPressed: isLoading
                       ? null
@@ -124,11 +136,10 @@ class _LoginPageState extends ConsumerState<LoginPage> {
                           ? const CircularProgressIndicator(
                               color: Colors.white,
                             )
-                          :  Text(
+                          : Text(
                               'Giriş',
                               textAlign: TextAlign.center,
-                              style:
-                                  TextStyle(color: Colors.white, fontSize: 15.sp), // Esnek font boyutu
+                              style: TextStyle(color: Colors.white, fontSize: 15.sp), // Esnek font boyutu
                             ),
                     ),
                   ),

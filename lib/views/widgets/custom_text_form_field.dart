@@ -8,6 +8,7 @@ class CustomTextFormField extends StatelessWidget {
   final TextInputType keyboardType;
   final Color backgroundColor;
   final TextEditingController controller;
+  final Widget? suffixIcon; // Suffix icon için eklenen parametre
 
   const CustomTextFormField({
     super.key,
@@ -17,11 +18,16 @@ class CustomTextFormField extends StatelessWidget {
     this.isObscure = false,
     this.keyboardType = TextInputType.text,
     this.backgroundColor = Colors.white,
+    this.suffixIcon, // Varsayılan null
   });
 
   @override
   Widget build(BuildContext context) {
     return TextFormField(
+      controller: controller,
+      obscureText: isObscure,
+      keyboardType: keyboardType,
+      validator: validator,
       decoration: InputDecoration(
         labelText: labelText,
         filled: true,
@@ -29,11 +35,8 @@ class CustomTextFormField extends StatelessWidget {
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(10.r), // Esnek border radius
         ),
+        suffixIcon: suffixIcon, // Suffix icon ekleniyor
       ),
-      obscureText: isObscure,
-      keyboardType: keyboardType,
-      validator: validator,
-      controller: controller,
     );
   }
 }

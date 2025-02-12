@@ -18,9 +18,21 @@ class _IntroductionScreenState extends State<IntroductionScreen> {
   // Kartları oluşturan fonksiyon
   List<Widget> _buildPages() {
     return [
-      const IntroductionCard(),
-      const IntroductionCard(),
-      const IntroductionCard(),
+       const IntroductionCard(
+        bottomImagePath: "assets/intro1.png",
+        height: 300,
+        width: 400,
+        bottomPad: 100,
+        
+      ),
+       const IntroductionCard( bottomImagePath: "assets/intro2.png",
+        height: 320,
+        width: 350,
+        bottomPad: 100,),
+       const IntroductionCard( bottomImagePath: "assets/intro3.png",
+        height: 350,
+        width: 350,
+        bottomPad: 80,),
       // İstediğin kadar kart ekleyebilirsin
     ];
   }

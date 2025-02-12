@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';  // flutter_screenutil ekledim
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+
 
 class CustomListTile extends StatelessWidget {
   final String folderNo;
@@ -26,65 +27,90 @@ class CustomListTile extends StatelessWidget {
     return GestureDetector(
       onTap: onTap,
       child: Container(
-        height: 170.h, // Esnek yükseklik
+        // Sabit yükseklik yerine içeriğe göre boyutlandırma sağlanıyor.
+        // Eğer sabit yükseklik isteniyorsa, metinlerin taşmasını önlemek için FittedBox veya AutoSizeText kullanın.
+        // height: 160.h,  // Bu satırı kaldırdık.
         decoration: BoxDecoration(
           color: Colors.white,
           borderRadius: BorderRadius.circular(10.r), // Esnek border radius
           boxShadow: [
             BoxShadow(
-              // ignore: deprecated_member_use
               color: Colors.grey.withOpacity(0.5),
-              spreadRadius: 2,
-              blurRadius: 5,
-              offset: const Offset(0, 3), // Shadow position
+              spreadRadius: 2.w, // Esnek spread radius
+              blurRadius: 5.w,   // Esnek blur radius
+              offset: Offset(0, 3.h), // Esnek offset
             ),
           ],
         ),
+        padding: EdgeInsets.symmetric(horizontal: 8.w, vertical: 8.h),
         child: Row(
+          crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             Icon(icon, size: 40.w, color: Colors.blueAccent), // Esnek ikon boyutu
-            SizedBox(width: 16.w), // Esnek genişlik
+            SizedBox(width: 16.w), // Esnek boşluk
             Expanded(
               child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(
-                    "Klasör No: ${folderNo}",
-                    style: TextStyle(
-                      fontSize: 18.sp, // Esnek font boyutu
-                      fontWeight: FontWeight.bold,
+                  // FittedBox ile metin alanına sığdırılıyor.
+                  FittedBox(
+                    fit: BoxFit.scaleDown,
+                    alignment: Alignment.centerLeft,
+                    child: Text(
+                      "Klasör No: $folderNo",
+                      style: TextStyle(
+                        fontSize: 18.sp, // Esnek font boyutu
+                        fontWeight: FontWeight.bold,
+                      ),
                     ),
                   ),
-                  SizedBox(height: 8.h), // Esnek yükseklik
-                  Text(
-                    "Konu: ${foldermean}",
-                    style: TextStyle(
-                      fontSize: 18.sp, // Esnek font boyutu
-                      fontWeight: FontWeight.bold,
+                  SizedBox(height: 8.h),
+                  FittedBox(
+                    fit: BoxFit.scaleDown,
+                    alignment: Alignment.centerLeft,
+                    child: Text(
+                      "Konu: $foldermean",
+                      style: TextStyle(
+                        fontSize: 18.sp,
+                        fontWeight: FontWeight.bold,
+                      ),
                     ),
                   ),
-                  SizedBox(height: 8.h), // Esnek yükseklik
-                  Text(
-                    "Tarih: ${folderDate}",
-                    style: TextStyle(
-                      fontSize: 18.sp, // Esnek font boyutu
-                      fontWeight: FontWeight.bold,
+                  SizedBox(height: 8.h),
+                  FittedBox(
+                    fit: BoxFit.scaleDown,
+                    alignment: Alignment.centerLeft,
+                    child: Text(
+                      "Tarih: $folderDate",
+                      style: TextStyle(
+                        fontSize: 18.sp,
+                        fontWeight: FontWeight.bold,
+                      ),
                     ),
                   ),
-                  SizedBox(height: 8.h), // Esnek yükseklik
-                  Text(
-                    "Dosya İslem NO: ${islem}",
-                    style: TextStyle(
-                      fontSize: 18.sp, // Esnek font boyutu
-                      fontWeight: FontWeight.bold,
+                  SizedBox(height: 8.h),
+                  FittedBox(
+                    fit: BoxFit.scaleDown,
+                    alignment: Alignment.centerLeft,
+                    child: Text(
+                      "Dosya İşlem No: $islem",
+                      style: TextStyle(
+                        fontSize: 18.sp,
+                        fontWeight: FontWeight.bold,
+                      ),
                     ),
                   ),
-                  SizedBox(height: 8.h), // Esnek yükseklik
-                  Text(
-                    "Parsel: ${parsel}",
-                    style: TextStyle(
-                      fontSize: 18.sp, // Esnek font boyutu
-                      fontWeight: FontWeight.bold,
+                  SizedBox(height: 8.h),
+                  FittedBox(
+                    fit: BoxFit.scaleDown,
+                    alignment: Alignment.centerLeft,
+                    child: Text(
+                      "Parsel: $parsel",
+                      style: TextStyle(
+                        fontSize: 18.sp,
+                        fontWeight: FontWeight.bold,
+                      ),
                     ),
                   ),
                 ],

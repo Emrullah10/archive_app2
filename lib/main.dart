@@ -37,7 +37,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ScreenUtilInit(
-      designSize: const Size(450, 900), // Tasarımınızın orijinal boyutları (örneğin, Figma'daki boyutlar)
+      designSize: const Size(450, 750), // Tasarımınızın orijinal boyutları (örneğin, Figma'daki boyutlar)
       minTextAdapt: true,
       splitScreenMode: true,
       builder: (context, child) {

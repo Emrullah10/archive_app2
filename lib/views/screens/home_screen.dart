@@ -209,7 +209,7 @@ class _HomePageState extends ConsumerState<HomePage> {
                 ),
               ],
             ),
-            const SizedBox(height: 10),
+             SizedBox(height: 10.h),
             isLoading
                 ? const Center(child: CircularProgressIndicator())
                 : Expanded(
@@ -225,7 +225,7 @@ class _HomePageState extends ConsumerState<HomePage> {
                         final archiveItem = allArchiveList[index];
 
                         return Padding(
-                          padding: EdgeInsets.symmetric(vertical: 8.h),
+                          padding: const EdgeInsets.symmetric(vertical: 8),
                           child: CustomListTile(
                             folderNo: archiveItem.klasorNo ?? "",
                             folderDate: archiveItem.tarih ?? "",

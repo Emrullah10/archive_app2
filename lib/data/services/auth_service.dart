@@ -38,7 +38,7 @@ class AuthService {
       return AuthModel.fromJson(result);
     } else {
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('Login failed')),
+        const SnackBar(content: Text('Giriş sırasında hata oluştu,Lütfen tekrar deneyin')),
       );
       return null;
     }

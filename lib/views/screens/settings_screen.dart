@@ -42,7 +42,7 @@ class SettingPage extends StatelessWidget {
                 ),
                 child: Center(
                   child: Image.asset(
-                    'assets/serdivan.png',
+                    'assets/bilicisoft.jpg',
                     width: 150.w, // Esnek boyut
                     height: 150.h, // Esnek boyut
                   ),

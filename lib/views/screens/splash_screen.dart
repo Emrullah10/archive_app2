@@ -74,17 +74,26 @@ class _SplashScreenState extends State<SplashScreen> with TickerProviderStateMix
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Image.asset(
-                'assets/serdivan.png',
-                height: 100.h,  // Esnek logo boyutu
-                width: 100.w,  // Esnek logo boyutu
+                'assets/bilicisoft.jpg',
+                height: 200.h,  // Esnek logo boyutu
+                width: 200.w,  // Esnek logo boyutu
               ),
               const SizedBox(height: 20),
               Text(
-                'SERDİVAN BELEDİYESİ',
+                'Bilici Arşiv Uygulaması',
                 style: TextStyle(
                   fontSize: 24.sp,  // Esnek font boyutu
                   fontWeight: FontWeight.bold,
                 ),
+              ),
+               Text(
+                'Hoşgeldiniz',
+                style: TextStyle(
+                  fontSize: 24.sp,  // Esnek font boyutu
+                  fontWeight: FontWeight.bold,
+                  
+                ),
+                textAlign: TextAlign.center,
               ),
             ],
           ),
